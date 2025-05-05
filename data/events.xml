@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<events xmlns="https://malbet.example.com/schema/events"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="https://malbet.example.com/schema/events events.xsd">
+  
+  <!-- Метаданные о файле данных -->
+  <metadata>
+    <title>Спортивные события MalBet</title>
+    <description>Данные о спортивных событиях и коэффициентах на сайте MalBet</description>
+    <lastUpdated>2025-03-26T18:30:00+03:00</lastUpdated>
+    <version>1.0</version>
+  </metadata>
+  
+  <!-- Категории спортивных событий -->
+  <categories>
+    <category id="football" name="Футбол" popular="true">
+      <icon>football.png</icon>
+      <description>Футбольные матчи ведущих чемпионатов мира</description>
+    </category>
+    <category id="hockey" name="Хоккей" popular="true">
+      <icon>hockey.png</icon>
+      <description>Хоккейные матчи КХЛ, НХЛ и международных турниров</description>
+    </category>
+    <category id="basketball" name="Баскетбол" popular="true">
+      <icon>basketball-ball-variant.png</icon>
+      <description>Баскетбольные матчи НБА, Евролиги и других турниров</description>
+    </category>
+    <category id="tennis" name="Теннис" popular="false">
+      <icon>tenis.png</icon>
+      <description>Теннисные матчи ATP и WTA туров</description>
+    </category>
+    <category id="cybersport" name="Киберспорт" popular="true">
+      <icon>cybersport.png</icon>
+      <description>Соревнования по киберспорту: Dota 2, CS:GO, LoL</description>
+    </category>
+  </categories>
+  
+  <!-- Спортивные события -->
+  <event id="e001" categoryId="football" featured="true" live="false">
+    <title>Спартак - ЦСКА</title>
+    <startTime>2025-03-26T20:00:00+03:00</startTime>
+    <endTime>2025-03-26T21:45:00+03:00</endTime>
+    <tournament>Премьер-лига России</tournament>
+    <teams>
+      <team id="t001" type="home">
+        <name>Спартак</name>
+        <logo>team1.svg</logo>
+        <statistics>
+          <position>3</position>
+          <wins>15</wins>
+          <draws>5</draws>
+          <losses>6</losses>
+          <goalsScored>40</goalsScored>
+          <goalsConceded>25</goalsConceded>
+        </statistics>
+      </team>
+      <team id="t002" type="away">
+        <name>ЦСКА</name>
+        <logo>team2.svg</logo>
+        <statistics>
+          <position>2</position>
+          <wins>17</wins>
+          <draws>4</draws>
+          <losses>5</losses>
+          <goalsScored>45</goalsScored>
+          <goalsConceded>20</goalsConceded>
+        </statistics>
+      </team>
+    </teams>
+    <odds>
+      <market id="m001" name="Исход матча">
+        <outcome id="o001" name="П1" value="2.15" />
+        <outcome id="o002" name="Х" value="3.40" />
+        <outcome id="o003" name="П2" value="3.10" />
+      </market>
+      <market id="m002" name="Тотал голов">
+        <outcome id="o004" name="Больше 2.5" value="1.85" />
+        <outcome id="o005" name="Меньше 2.5" value="1.95" />
+      </market>
+      <market id="m003" name="Обе забьют">
+        <outcome id="o006" name="Да" value="1.75" />
+        <outcome id="o007" name="Нет" value="2.05" />
+      </market>
+    </odds>
+  </event>
+  
+  <event id="e002" categoryId="hockey" featured="true" live="false">
+    <title>СКА - Динамо</title>
+    <startTime>2025-03-27T18:30:00+03:00</startTime>
+    <endTime>2025-03-27T21:00:00+03:00</endTime>
+    <tournament>КХЛ</tournament>
+    <teams>
+      <team id="t003" type="home">
+        <name>СКА</name>
+        <logo>team3.svg</logo>
+        <statistics>
+          <position>1</position>
+          <wins>35</wins>
+          <draws>0</draws>
+          <losses>7</losses>
+          <goalsScored>150</goalsScored>
+          <goalsConceded>85</goalsConceded>
+        </statistics>
+      </team>
+      <team id="t004" type="away">
+        <name>Динамо</name>
+        <logo>team4.svg</logo>
+        <statistics>
+          <position>4</position>
+          <wins>29</wins>
+          <draws>0</draws>
+          <losses>13</losses>
+          <goalsScored>130</goalsScored>
+          <goalsConceded>95</goalsConceded>
+        </statistics>
+      </team>
+    </teams>
+    <odds>
+      <market id="m004" name="Исход матча">
+        <outcome id="o008" name="П1" value="1.85" />
+        <outcome id="o009" name="Х" value="4.20" />
+        <outcome id="o010" name="П2" value="3.50" />
+      </market>
+      <market id="m005" name="Тотал шайб">
+        <outcome id="o011" name="Больше 4.5" value="1.75" />
+        <outcome id="o012" name="Меньше 4.5" value="2.05" />
+      </market>
+      <market id="m006" name="Фора">
+        <outcome id="o013" name="Ф1 (-1.5)" value="2.25" />
+        <outcome id="o014" name="Ф2 (+1.5)" value="1.65" />
+      </market>
+    </odds>
+  </event>
+  
+  <event id="e003" categoryId="basketball" featured="true" live="true">
+    <title>ЦСКА - Зенит</title>
+    <startTime>2025-03-26T21:15:00+03:00</startTime>
+    <endTime>2025-03-26T23:00:00+03:00</endTime>
+    <tournament>Единая лига ВТБ</tournament>
+    <liveScore>
+      <period>2</period>
+      <homeTeamScore>45</homeTeamScore>
+      <awayTeamScore>40</awayTeamScore>
+      <timeRemaining>04:30</timeRemaining>
+    </liveScore>
+    <teams>
+      <team id="t005" type="home">
+        <name>ЦСКА</name>
+        <logo>team5.svg</logo>
+        <statistics>
+          <position>1</position>
+          <wins>18</wins>
+          <draws>0</draws>
+          <losses>2</losses>
+          <pointsScored>1560</pointsScored>
+          <pointsConceded>1350</pointsConceded>
+        </statistics>
+      </team>
+      <team id="t006" type="away">
+        <name>Зенит</name>
+        <logo>team6.svg</logo>
+        <statistics>
+          <position>2</position>
+          <wins>16</wins>
+          <draws>0</draws>
+          <losses>4</losses>
+          <pointsScored>1520</pointsScored>
+          <pointsConceded>1410</pointsConceded>
+        </statistics>
+      </team>
+    </teams>
+    <odds>
+      <market id="m007" name="Исход матча">
+        <outcome id="o015" name="П1" value="1.65" />
+        <outcome id="o016" name="П2" value="2.30" />
+      </market>
+      <market id="m008" name="Тотал очков">
+        <outcome id="o017" name="Больше 158.5" value="1.90" />
+        <outcome id="o018" name="Меньше 158.5" value="1.90" />
+      </market>
+      <market id="m009" name="Фора">
+        <outcome id="o019" name="Ф1 (-5.5)" value="1.95" />
+        <outcome id="o020" name="Ф2 (+5.5)" value="1.85" />
+      </market>
+    </odds>
+  </event>
+  
+  <event id="e004" categoryId="cybersport" featured="false" live="false">
+    <title>Natus Vincere - Team Liquid</title>
+    <startTime>2025-03-28T19:00:00+03:00</startTime>
+    <endTime>2025-03-28T22:00:00+03:00</endTime>
+    <tournament>ESL Pro League</tournament>
+    <teams>
+      <team id="t007" type="home">
+        <name>Natus Vincere</name>
+        <logo>team7.svg</logo>
+        <statistics>
+          <position>2</position>
+          <wins>8</wins>
+          <draws>0</draws>
+          <losses>2</losses>
+          <roundsWon>135</roundsWon>
+          <roundsLost>90</roundsLost>
+        </statistics>
+      </team>
+      <team id="t008" type="away">
+        <name>Team Liquid</name>
+        <logo>team8.svg</logo>
+        <statistics>
+          <position>3</position>
+          <wins>7</wins>
+          <draws>0</draws>
+          <losses>3</losses>
+          <roundsWon>126</roundsWon>
+          <roundsLost>105</roundsLost>
+        </statistics>
+      </team>
+    </teams>
+    <odds>
+      <market id="m010" name="Исход матча">
+        <outcome id="o021" name="П1" value="1.75" />
+        <outcome id="o022" name="П2" value="2.05" />
+      </market>
+      <market id="m011" name="Тотал карт">
+        <outcome id="o023" name="Больше 2.5" value="2.10" />
+        <outcome id="o024" name="Меньше 2.5" value="1.70" />
+      </market>
+      <market id="m012" name="Фора на картах">
+        <outcome id="o025" name="Ф1 (-1.5)" value="3.20" />
+        <outcome id="o026" name="Ф2 (+1.5)" value="1.35" />
+      </market>
+    </odds>
+  </event>
+  
+  <!-- Информация о бонусах и акциях -->
+  <promotions>
+    <promotion id="1">
+      <title>Бонус за первый депозит</title>
+      <description>Получите бонус 100% до 1000 BYN при первом пополнении счета</description>
+      <image>promo_bonus.jpg</image>
+      <terms>
+        <term>Срок действия: до 31.12.2025</term>
+        <term>Минимальный депозит: 20 BYN</term>
+        <term>Отыгрыш: х5 от суммы бонуса</term>
+      </terms>
+    </promotion>
+    <promotion id="2">
+      <title>Фрибет на хоккей</title>
+      <description>Получите бесплатную ставку на сумму до 50 BYN при ставке на матч СКА - Динамо</description>
+      <image>promo_freebet.jpg</image>
+      <terms>
+        <term>Срок действия: до 15.11.2025</term>
+        <term>Минимальная ставка: 30 BYN</term>
+        <term>Коэффициент от 1.8</term>
+      </terms>
+    </promotion>
+  </promotions>
+</events> 

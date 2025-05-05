@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Основной круг логотипа -->
+  <circle cx="100" cy="100" r="95" fill="#0066cc" opacity="0.1" />
+  <circle cx="100" cy="100" r="85" fill="none" stroke="#0066cc" stroke-width="4" />
+  
+  <!-- Внутренний элемент логотипа - стилизованная буква B -->
+  <path d="M70 60 
+           C70 60, 130 60, 130 90
+           C130 110, 110 115, 110 115
+           C110 115, 140 120, 140 145
+           C140 170, 70 170, 70 170
+           L70 60 Z" 
+        fill="none" 
+        stroke="#0066cc" 
+        stroke-width="8" 
+        stroke-linecap="round" 
+        stroke-linejoin="round" />
+  
+  <!-- Горизонтальные линии на букве B -->
+  <line x1="70" y1="115" x2="110" y2="115" stroke="#0066cc" stroke-width="8" stroke-linecap="round" />
+  
+  <!-- Игральные элементы -->
+  <circle cx="155" cy="50" r="15" fill="#ff9900" />
+  <circle cx="155" cy="50" r="10" fill="white" />
+  <text x="155" y="55" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle" fill="#0066cc">1</text>
+  
+  <!-- Второй игральный элемент -->
+  <rect x="145" y="145" width="30" height="30" rx="5" ry="5" fill="#0066cc" />
+  <text x="160" y="167" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle" fill="white">7</text>
+  
+  <!-- Анимация пульсации логотипа -->
+  <animate 
+    xlink:href="circle[r='85']"
+    attributeName="r" 
+    values="85;88;85" 
+    dur="2s" 
+    repeatCount="indefinite" />
+  
+  <!-- Анимация цвета игрального элемента -->
+  <animate 
+    xlink:href="circle[r='15']"
+    attributeName="fill" 
+    values="#ff9900;#ff0000;#ff9900" 
+    dur="3s" 
+    repeatCount="indefinite" />
+  
+  <!-- Определение градиента для фона -->
+  <defs>
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#003366" />
+      <stop offset="100%" stop-color="#0099ff" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Маска для создания эффекта блеска -->
+  <mask id="shineMask">
+    <rect x="0" y="0" width="200" height="200" fill="white" />
+    <circle cx="100" cy="100" r="95" fill="black" opacity="0.2" />
+  </mask>
+  
+  <!-- Эффект блеска -->
+  <rect x="0" y="0" width="200" height="200" fill="url(#logoGradient)" opacity="0.1" mask="url(#shineMask)" />
+  
+  <!-- Метаданные логотипа -->
+  <metadata>
+    <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+             xmlns:dc="http://purl.org/dc/elements/1.1/">
+      <rdf:Description about="https://malbet.example.com">
+        <dc:title>MalBet Logo</dc:title>
+        <dc:creator>MalBet Design Team</dc:creator>
+        <dc:rights>© 2025 MalBet. All rights reserved.</dc:rights>
+        <dc:description>Logo for MalBet betting website</dc:description>
+      </rdf:Description>
+    </rdf:RDF>
+  </metadata>
+</svg> 

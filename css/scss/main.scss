@@ -1,0 +1,2361 @@
+@import 'variables';
+@import 'mixins';
+@import 'login';
+
+// Сброс стилей
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+// Основные стили
+body {
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  color: $text-color;
+  background-color: #0f0a1e;
+  line-height: 1.6;
+  background: linear-gradient(135deg, #1e103d, #0f0a1e);
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+  
+  &::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 10% 10%, rgba(165, 55, 253, 0.1), transparent 35%),
+                radial-gradient(circle at 90% 90%, rgba(0, 230, 118, 0.05), transparent 25%);
+    z-index: -1;
+  }
+}
+
+// Стиль для главной страницы
+body.main-page {
+  background: linear-gradient(135deg, #1e103d, #0f0a1e);
+  
+  &::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 10% 10%, rgba(165, 55, 253, 0.1), transparent 35%),
+                radial-gradient(circle at 90% 90%, rgba(0, 230, 118, 0.05), transparent 25%);
+    z-index: -1;
+  }
+  
+  .stripes {
+    // ... existing code ...
+  }
+}
+
+// Декоративные элементы для главной страницы
+.main-page .decoration {
+  position: fixed;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.main-page .decoration-circle {
+  border-radius: 50%;
+  opacity: 0.2;
+  filter: blur(120px);
+  position: fixed;
+  mix-blend-mode: screen;
+}
+
+.main-page .decoration-circle-1 {
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, rgba($primary-color, 0.3) 0%, rgba($primary-color, 0) 70%);
+  top: -400px;
+  left: -200px;
+  animation: float 30s ease-in-out infinite;
+  z-index: 0;
+}
+
+.main-page .decoration-circle-2 {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba($accent-color, 0.3) 0%, rgba($accent-color, 0) 70%);
+  bottom: -300px;
+  right: -100px;
+  animation: float 25s ease-in-out infinite reverse;
+  z-index: 0;
+}
+
+.main-page .decoration-circle-3 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(mix($primary-color, $accent-color, 50%), 0.3) 0%, rgba(mix($primary-color, $accent-color, 50%), 0) 70%);
+  top: 40%;
+  left: 20%;
+  animation: float 20s ease-in-out infinite;
+  z-index: 0;
+}
+
+// Анимации
+@keyframes float {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(30px, -30px) scale(1.05);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+@keyframes moveStripes {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-20px, -20px);
+  }
+}
+
+// Общие стили для контейнеров и типографики
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $spacing-md;
+  position: relative;
+  z-index: 1;
+  
+  @include mobile {
+    padding: 0 $spacing-sm;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-family-heading;
+  font-weight: 700;
+  margin-bottom: $spacing-md;
+  color: $text-color;
+}
+
+h1 { font-size: $font-size-xxxl; }
+h2 { font-size: $font-size-xxl; }
+h3 { font-size: $font-size-xl; }
+
+a {
+  color: $primary-color;
+  text-decoration: none;
+  @include transition();
+  
+  &:hover {
+    color: darken($primary-color, 10%);
+  }
+}
+
+img {
+  max-width: 15%;
+  height: auto;
+}
+
+ul {
+  list-style: none;
+}
+
+// Стили для кнопок
+.btn {
+  display: inline-block;
+  padding: $spacing-sm $spacing-lg;
+  font-size: $font-size-base;
+  font-weight: 600;
+  text-align: center;
+  border: none;
+  border-radius: $border-radius-base;
+  cursor: pointer;
+  @include transition();
+  
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  
+  &-primary {
+    @include gradient-button($accent-color, lighten($accent-color, 10%), $dark-color);
+    width: 100%;
+    
+    &:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba($accent-color, 0.4);
+    }
+  }
+  
+  &-secondary {
+    background-color: $secondary-color;
+    color: white;
+    
+    &:hover:not(:disabled) {
+      background-color: darken($secondary-color, 10%);
+    }
+  }
+  
+  &-outline {
+    background-color: transparent;
+    border: 1px solid $primary-color;
+    color: $primary-color;
+    
+    &:hover:not(:disabled) {
+      background-color: $primary-color;
+      color: white;
+    }
+  }
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  border-radius: $border-radius-base;
+  font-weight: $font-weight-medium;
+  font-size: $font-size-base;
+  transition: $transition-base;
+  text-decoration: none;
+  cursor: pointer;
+  
+  &--login {
+    background-color: transparent;
+    border: 1px solid $primary-color;
+    color: $primary-color;
+    
+    &:hover {
+      background-color: rgba($primary-color, 0.1);
+    }
+  }
+  
+  &--register {
+    background-color: $accent-color;
+    color: $dark-color;
+    border: none;
+    font-weight: $font-weight-bold;
+    
+    &:hover {
+      background-color: darken($accent-color, 5%);
+    }
+  }
+}
+
+// Шапка сайта (header)
+.header {
+  background-color: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  height: 75px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-bottom: 1px solid rgba($white, 0.08);
+  
+  &-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    
+    &__link {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      
+      &:hover .logo__text {
+        text-shadow: 0 0 15px rgba($primary-color, 0.8);
+      }
+    }
+    
+    &__image {
+      margin-right: 8px;
+      filter: drop-shadow(0 0 8px rgba($primary-color, 0.5));
+    }
+    
+    &__text {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: $primary-color;
+      letter-spacing: 0.5px;
+      transition: text-shadow 0.3s ease;
+      
+      &--white {
+        color: $white;
+      }
+    }
+  }
+  
+  .nav {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    margin: 0 20px;
+    
+    &__list {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+    }
+    
+    &__link {
+      color: rgba($white, 0.8);
+      text-decoration: none;
+      font-weight: $font-weight-medium;
+      padding: 8px 0;
+      position: relative;
+      transition: all 0.3s ease;
+      font-size: 14px;
+      white-space: nowrap;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: $primary-color;
+        transition: width 0.3s ease;
+      }
+      
+      &:hover {
+        color: $white;
+        
+        &::after {
+          width: 100%;
+        }
+      }
+      
+      &.active {
+        color: $primary-color;
+        font-weight: $font-weight-semibold;
+        
+        &::after {
+          width: 100%;
+          background-color: $primary-color;
+          box-shadow: 0 0 10px rgba($primary-color, 0.5);
+        }
+      }
+    }
+  }
+  
+  .user-panel {
+    display: flex;
+    gap: 15px;
+  }
+  
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: $font-weight-semibold;
+    font-size: $font-size-sm;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    
+    &--login {
+      background-color: transparent;
+      border: 1px solid $primary-color;
+      color: $primary-color;
+      
+      &:hover {
+        background-color: rgba($primary-color, 0.1);
+        box-shadow: 0 0 15px rgba($primary-color, 0.3);
+        transform: translateY(-2px);
+      }
+    }
+    
+    &--register {
+      background: linear-gradient(135deg, $accent-color, darken($accent-color, 8%));
+      color: $dark-color;
+      border: none;
+      font-weight: $font-weight-bold;
+      box-shadow: 0 4px 15px rgba($accent-color, 0.3);
+      
+      &:hover {
+        background: linear-gradient(135deg, lighten($accent-color, 5%), $accent-color);
+        box-shadow: 0 6px 20px rgba($accent-color, 0.5);
+        transform: translateY(-2px);
+      }
+    }
+  }
+}
+
+// Основной контейнер
+.main {
+  padding: $spacing-xl 0;
+  flex: 1;
+}
+
+.main-container {
+  position: relative;
+  display: flex;
+  gap: 20px;
+  z-index: 5;
+  
+  @include mobile {
+    flex-direction: column;
+  }
+}
+
+// Сайдбар
+.sidebar {
+  background-color: rgba($dark-color, 0.6);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 16px;
+  padding: 25px;
+  width: 280px;
+  position: relative;
+  z-index: 5;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2), 
+              0 1px 3px rgba($white, 0.05);
+  border: 1px solid rgba($white, 0.08);
+  
+  @include mobile {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
+
+.sidebar-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: $white;
+  margin-bottom: 18px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  position: relative;
+  padding-bottom: 8px;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background: linear-gradient(90deg, $primary-color, transparent);
+  }
+}
+
+.sidebar-section {
+  margin-bottom: 25px;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.sport-list, .league-list {
+  margin-bottom: 25px;
+}
+
+.sport-item, .league-item {
+  margin-bottom: 8px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.sport-link, .league-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 15px;
+  background-color: rgba($white, 0.04);
+  border-radius: 10px;
+  color: rgba($white, 0.9);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: 1px solid rgba($white, 0.02);
+  
+  &:hover {
+    background-color: rgba($primary-color, 0.15);
+    color: $white;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.sport-name, .league-name {
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+
+.sport-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  filter: invert(1);
+}
+
+.event-count {
+  background-color: rgba($white, 0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: rgba($white, 0.7);
+}
+
+.sport-item.popular .sport-link {
+  background-color: rgba($primary-color, 0.15);
+  
+  &:hover {
+    background-color: rgba($primary-color, 0.25);
+  }
+}
+
+// Основной контент
+.content {
+  position: relative;
+  flex: 1;
+  z-index: 5;
+}
+
+// Слайдер промо
+.promo-slider {
+  margin-bottom: 30px;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  position: relative;
+  
+  .promo-slide {
+    position: relative;
+    height: 300px;
+    overflow: hidden;
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    
+    &:hover img {
+      transform: scale(1.05);
+    }
+    
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(to right, rgba($dark-color, 0.7), rgba($dark-color, 0.3));
+      z-index: 1;
+    }
+    
+    .promo-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 30px;
+      z-index: 2;
+      
+      h2 {
+        font-size: $font-size-xl;
+        font-weight: $font-weight-bold;
+        color: $white;
+        margin-bottom: 10px;
+        text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      }
+      
+      p {
+        font-size: $font-size-base;
+        color: rgba($white, 0.9);
+        margin-bottom: 20px;
+        max-width: 60%;
+      }
+      
+      .promo-btn {
+        display: inline-block;
+        padding: 12px 24px;
+        background: linear-gradient(135deg, $primary-color, lighten($primary-color, 10%));
+        color: $white;
+        border-radius: 30px;
+        font-weight: $font-weight-semibold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+        text-decoration: none;
+        box-shadow: 0 5px 15px rgba($primary-color, 0.3);
+        
+        &:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 8px 20px rgba($primary-color, 0.4);
+          background: linear-gradient(135deg, lighten($primary-color, 5%), lighten($primary-color, 15%));
+        }
+        
+        &:active {
+          transform: translateY(-1px);
+          box-shadow: 0 3px 10px rgba($primary-color, 0.3);
+        }
+      }
+    }
+  }
+  
+  .slider-dots {
+    position: absolute;
+    bottom: 15px;
+    right: 30px;
+    display: flex;
+    gap: 8px;
+    z-index: 3;
+    
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: rgba($white, 0.4);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      
+      &:hover, &.active {
+        background-color: $accent-color;
+        transform: scale(1.2);
+      }
+    }
+  }
+}
+
+// Фильтры событий
+.events-filter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  background-color: rgba($dark-color, 0.6);
+  padding: 15px 20px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba($white, 0.08);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.filter-tabs {
+  display: flex;
+  gap: 10px;
+}
+
+.filter-tab {
+  padding: 10px 18px;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  color: rgba($white, 0.7);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: $font-weight-medium;
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba($white, 0.05);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+    z-index: -1;
+    border-radius: 8px;
+  }
+  
+  &:hover {
+    color: $white;
+    
+    &::before {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+  }
+  
+  &.active {
+    background-color: rgba($primary-color, 0.15);
+    color: $primary-color;
+    box-shadow: 0 0 15px rgba($primary-color, 0.2);
+  }
+}
+
+.filter-select {
+  padding: 10px 18px;
+  background-color: rgba($white, 0.03);
+  border: 1px solid rgba($white, 0.1);
+  border-radius: 8px;
+  color: $white;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+  &:focus {
+    border-color: $primary-color;
+    box-shadow: 0 0 15px rgba($primary-color, 0.2);
+  }
+  
+  option {
+    background-color: $dark-color;
+    color: $white;
+    padding: 10px;
+  }
+}
+
+// Карточки событий
+.events-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  z-index: 5;
+}
+
+// Улучшенные карточки событий
+.event-card {
+  background: linear-gradient(135deg, rgba(30, 15, 60, 0.95) 0%, rgba(16, 7, 32, 0.98) 100%);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 14px;
+  border: 1px solid rgba(165, 55, 253, 0.15);
+  overflow: hidden;
+  position: relative;
+  max-width: 100%;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s, box-shadow 0.2s;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  }
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, #7448ff, #a537fd);
+    opacity: 0.7;
+  }
+  
+  .event-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgba($white, 0.08);
+    
+    .tournament-name {
+      color: $white;
+      font-weight: 600;
+      font-size: 15px;
+      letter-spacing: 0.3px;
+      display: flex;
+      align-items: center;
+      
+      &::before {
+        content: '';
+        display: inline-block;
+        width: 6px;
+        height: 6px;
+        background: $primary-color;
+        border-radius: 50%;
+        margin-right: 8px;
+      }
+    }
+    
+    .event-time {
+      color: $primary-color;
+      font-size: 14px;
+      font-weight: 500;
+      background: rgba($primary-color, 0.1);
+      padding: 4px 10px;
+      border-radius: 12px;
+    }
+  }
+  
+  .teams-container {
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .team {
+    display: flex;
+    align-items: center;
+    background: rgba(40, 20, 80, 0.2);
+    border-radius: 8px;
+    padding: 8px 12px;
+    
+    .team-logo {
+      display: none; /* Hide team logos */
+    }
+    
+    .team-name {
+      font-weight: 500;
+      font-size: 15px;
+      color: $white;
+    }
+  }
+  
+  .odds-container {
+    margin-bottom: 16px;
+    
+    .market-name {
+      font-size: 14px;
+      color: rgba($white, 0.7);
+      font-weight: 500;
+      margin-bottom: 10px;
+      letter-spacing: 0.2px;
+    }
+    
+    .outcome-container {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      
+      .outcome {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 54px;
+        background: rgba(40, 20, 80, 0.3);
+        color: $white;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 8px 10px;
+        min-width: 60px;
+        position: relative;
+        overflow: hidden;
+        
+        &::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(180deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 100%);
+          pointer-events: none;
+        }
+        
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 1px;
+          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+          opacity: 0;
+          transition: opacity 0.3s;
+        }
+        
+        &:hover {
+          background: rgba(60, 30, 100, 0.4);
+          transform: translateY(-1px);
+          
+          &::after {
+            opacity: 1;
+          }
+        }
+        
+        &.active {
+          background: linear-gradient(135deg, #00e676, #00c853);
+          color: $dark-color;
+          border: none;
+          box-shadow: 0 4px 10px rgba(0, 230, 118, 0.3);
+          transform: translateY(-1px);
+        }
+        
+        .outcome-name {
+          font-size: 13px;
+          color: rgba($white, 0.7);
+          margin-bottom: 4px;
+        }
+        
+        .outcome-value {
+          font-size: 20px;
+          font-weight: 700;
+          color: $white;
+          
+          .active & {
+            color: rgba(0, 0, 0, 0.7);
+          }
+        }
+      }
+    }
+  }
+  
+  .more-markets-btn {
+    display: inline-block;
+    padding: 6px 12px;
+    font-size: 13px;
+    color: rgba($white, 0.7);
+    background: rgba(60, 30, 100, 0.2);
+    border: 1px solid rgba($white, 0.08);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    
+    &:hover {
+      background: rgba(80, 40, 140, 0.3);
+      color: rgba($white, 0.9);
+    }
+  }
+}
+
+// Winline-style матч компонент
+.winline-match {
+  background: rgba(16, 8, 32, 0.95);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 10px;
+  width: 100%;
+  max-width: 320px;
+  
+  // Заголовок турнира
+  .tournament-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 10px;
+    font-size: 14px;
+    border-bottom: 1px solid rgba($white, 0.05);
+    
+    .tournament-name {
+      color: $white;
+      font-weight: 500;
+    }
+    
+    .match-time {
+      color: $primary-color;
+      font-size: 14px;
+    }
+  }
+  
+  // Блок команд
+  .teams-container {
+    padding: 10px 10px 5px;
+  }
+  
+  // Команда
+  .team-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    
+    img {
+      width: 18px;
+      height: 18px;
+      margin-right: 8px;
+    }
+    
+    .team-name {
+      font-size: 14px;
+      color: $white;
+    }
+  }
+  
+  // Заголовок ставки
+  .market-title {
+    padding: 5px 10px;
+    font-size: 14px;
+    color: rgba($white, 0.7);
+  }
+  
+  // Сетка исходов
+  .outcomes-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 0 10px 10px;
+    
+    .outcome-row {
+      display: flex;
+      width: 100%;
+      height: 38px;
+      border-radius: 4px;
+      overflow: hidden;
+      
+      .outcome-button {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(24, 13, 44, 0.4);
+        font-size: 15px;
+        font-weight: 500;
+        color: $white;
+        cursor: pointer;
+        transition: background 0.2s;
+        border: none;
+        
+        &:hover {
+          background: rgba(30, 18, 54, 0.5);
+        }
+        
+        &.active {
+          background: $accent-color;
+          color: $dark-color;
+        }
+      }
+    }
+  }
+  
+  // Кнопка больше маркетов
+  .more-markets {
+    display: inline-block;
+    width: 100%;
+    padding: 6px 0;
+    text-align: center;
+    font-size: 12px;
+    color: rgba($white, 0.6);
+    background: rgba(20, 10, 38, 0.3);
+    border-top: 1px solid rgba($white, 0.05);
+    cursor: pointer;
+    
+    &:hover {
+      color: rgba($white, 0.8);
+    }
+  }
+}
+
+// Новый компактный стиль события матча
+.match-container {
+  background: rgba(16, 7, 32, 0.9);
+  border-radius: 10px;
+  overflow: hidden;
+  width: 100%;
+  max-width: 340px;
+  margin-bottom: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  
+  // Заголовок турнира
+  .tournament-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    border-bottom: 1px solid rgba($white, 0.06);
+    
+    .tournament-name {
+      font-size: 14px;
+      color: $white;
+      font-weight: 500;
+    }
+    
+    .match-time {
+      font-size: 13px;
+      color: $primary-color;
+    }
+  }
+  
+  // Команды
+  .teams-section {
+    padding: 12px 12px 8px;
+    
+    .team-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 6px;
+      
+      img {
+        width: 18px;
+        height: 18px;
+        margin-right: 8px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+      
+      .team-name {
+        font-size: 14px;
+        color: #fff;
+        font-weight: 500;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 150px;
+      }
+    }
+  }
+  
+  // Заголовок типа ставки
+  .market-header {
+    padding: 4px 12px;
+    font-size: 13px;
+    color: rgba($white, 0.6);
+    font-weight: 400;
+    border-top: 1px solid rgba($white, 0.04);
+  }
+  
+  // Коэффициенты
+  .outcomes-section {
+    padding: 6px 12px 12px;
+    
+    .outcome-row {
+      display: flex;
+      width: 100%;
+      gap: 4px;
+      margin-bottom: 4px;
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+      
+      .outcome-button {
+        flex: 1;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(25, 14, 46, 0.5);
+        color: $white;
+        font-size: 15px;
+        font-weight: 500;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        border: 1px solid rgba($white, 0.04);
+        
+        &:hover {
+          background: rgba(30, 18, 55, 0.6);
+          transform: translateY(-1px);
+        }
+        
+        &.active {
+          background: $accent-color;
+          color: $dark-color;
+          border-color: transparent;
+        }
+      }
+    }
+  }
+  
+  // Кнопка больше маркетов
+  .more-markets {
+    padding: 6px 0;
+    text-align: center;
+    font-size: 12px;
+    color: rgba($white, 0.5);
+    background: rgba(20, 10, 38, 0.5);
+    border-top: 1px solid rgba($white, 0.04);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    
+    &:hover {
+      color: rgba($white, 0.8);
+      background: rgba(25, 14, 46, 0.6);
+    }
+  }
+}
+
+// Кнопки с коэффициентами как на скрине
+.outcome-button {
+  min-width: 56px;
+  height: 36px;
+  border-radius: 8px;
+  background: rgba(40, 40, 56, 0.9);
+  color: $white;
+  font-size: 15px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  padding: 0 12px;
+  transition: background-color 0.2s ease;
+  
+  &:hover {
+    background: lighten(rgba(40, 40, 56, 0.9), 10%);
+  }
+  
+  &.active {
+    background: $accent-color;
+    color: $dark-color;
+    font-weight: 600;
+  }
+}
+
+// Обновленный дизайн кнопок с коэффициентами (как на скриншоте)
+.outcome {
+  position: relative;
+  border-radius: 6px;
+  padding: 8px 16px;
+  margin: 0 3px;
+  text-align: center;
+  background: rgba(30, 30, 46, 0.9);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 56px;
+  height: 44px;
+  
+  &:first-child {
+    margin-left: 0;
+  }
+  
+  &:last-child {
+    margin-right: 0;
+  }
+  
+  &:hover {
+    background: rgba(40, 40, 56, 0.95);
+  }
+  
+  &.active {
+    background: $accent-color;
+    color: $dark-color;
+    
+    .outcome-value {
+      color: $dark-color;
+      font-weight: 700;
+    }
+  }
+}
+
+.outcome-name {
+  display: none; // Скрываем названия (1, X, 2) как на скриншоте
+}
+
+.outcome-value {
+  font-size: 16px;
+  font-weight: 600;
+  color: $white;
+}
+
+.outcome-grid {
+  display: flex;
+  align-items: center;
+  margin-top: 6px;
+}
+
+.team-score {
+  font-size: 16px;
+  font-weight: 700;
+  color: $accent-color;
+  margin: 0 3px;
+}
+
+// Стиль для события матча с командами и коэффициентами
+.match-event {
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, rgba(30, 16, 61, 0.95), rgba(25, 12, 45, 0.95));
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(165, 55, 253, 0.15);
+  
+  .league-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 12px;
+    font-size: 14px;
+    color: #fff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(26, 14, 46, 0.6);
+    
+    .tournament-name {
+      font-weight: 500;
+      opacity: 0.9;
+    }
+    
+    .match-time {
+      color: $accent-color;
+      font-weight: 600;
+      background: rgba(0, 230, 118, 0.1);
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-size: 13px;
+    }
+  }
+  
+  .match-content {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px;
+  }
+  
+  .teams-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    flex: 1;
+  }
+  
+  .team-row {
+    display: flex;
+    align-items: center;
+    
+    img {
+      width: 22px;
+      height: 22px;
+      margin-right: 10px;
+      object-fit: contain;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    
+    .team-name {
+      font-size: 14px;
+      color: #fff;
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 150px;
+    }
+    
+    .team-score {
+      margin-left: 8px;
+      color: $accent-color;
+      font-weight: 600;
+      font-size: 14px;
+    }
+  }
+  
+  .outcomes-container {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 180px;
+    justify-content: flex-end;
+  }
+}
+
+// Update outcome button styles
+.outcome-button {
+  min-width: 56px;
+  height: 40px;
+  border-radius: 8px;
+  background: rgba(40, 40, 56, 0.9);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  padding: 0 12px;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.06), transparent);
+    pointer-events: none;
+  }
+  
+  &:hover {
+    background: rgba(61, 61, 86, 0.95);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  &.active {
+    background: $accent-color;
+    color: #1e103d;
+    font-weight: 700;
+    border-color: rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 15px rgba($accent-color, 0.3);
+  }
+}
+
+.outcome-grid {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 0;
+}
+
+// Боковая панель с купоном ставок
+.betslip-sidebar {
+  position: relative;
+  width: 320px;
+  z-index: 5;
+  
+  @include mobile {
+    width: 100%;
+    margin-top: 20px;
+  }
+}
+
+// Упрощенный купон ставок
+.betslip {
+  background: rgba(17, 8, 34, 0.98);
+  border-radius: 12px;
+  overflow: hidden;
+  width: 100%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  
+  // Заголовок
+  .betslip-header,
+  h3,
+  h4 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 15px;
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: $white;
+    border-bottom: 1px solid rgba($white, 0.06);
+    position: relative;
+  }
+  
+  // Скрываем любые иконки корзины
+  i.fa-trash, 
+  i.fa-trash-alt, 
+  svg[data-icon="trash"], 
+  svg[data-icon="trash-alt"],
+  .trash-icon,
+  [class*="trash"],
+  .clear-betslip {
+    display: none !important;
+  }
+  
+  // Контент купона
+  .betslip-content,
+  > div:not(.betslip-header):not(h3):not(h4) {
+    padding: 12px 15px;
+  }
+  
+  // Сообщение о пустом купоне
+  .empty-message,
+  p {
+    background: rgba(16, 8, 30, 0.3);
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+    border: 1px solid rgba($white, 0.05);
+    margin: 5px 0 10px 0;
+    color: rgba($white, 0.7);
+    font-size: 14px;
+    line-height: 1.4;
+    
+    &:first-of-type {
+      color: $white;
+      font-weight: 500;
+      font-size: 15px;
+      margin-bottom: 0;
+    }
+  }
+  
+  // Общий коэффициент
+  .coefficient-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+    font-size: 15px;
+    color: rgba($white, 0.85);
+    font-weight: 500;
+  }
+  
+  // Поле ввода ставки
+  .stake-input,
+  input[type="text"],
+  input:not([type]) {
+    width: 100%;
+    padding: 10px 12px;
+    background: rgba(20, 10, 40, 0.3);
+    border: 1px solid rgba($white, 0.1);
+    border-radius: 8px;
+    color: $white;
+    font-size: 15px;
+    font-weight: 500;
+    transition: border-color 0.2s ease;
+    margin-bottom: 10px;
+    
+    &:focus {
+      outline: none;
+      border-color: rgba($primary-color, 0.5);
+    }
+    
+    &::placeholder {
+      color: rgba($white, 0.3);
+    }
+  }
+  
+  // Возможный выигрыш
+  .potential-win {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 15px;
+    
+    .possible-win-label,
+    .potential-win-label {
+      color: $accent-color;
+      font-weight: 500;
+    }
+    
+    span {
+      color: $accent-color;
+      font-weight: 500;
+    }
+  }
+  
+  // Кнопка "Сделать ставку"
+  .place-bet-btn,
+  button {
+    width: 100%;
+    padding: 12px;
+    background: rgba(70, 70, 80, 0.3);
+    color: rgba($white, 0.7);
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    text-transform: uppercase;
+    text-align: center;
+    cursor: default;
+    letter-spacing: 0.5px;
+    transition: background 0.2s ease;
+    
+    &.active {
+      background: $accent-color;
+      color: $dark-color;
+      cursor: pointer;
+      
+      &:hover {
+        background: lighten($accent-color, 5%);
+      }
+    }
+  }
+  
+  // Стили для русского текста
+  .betslip-title,
+  .coupon-title {
+    font-weight: 600;
+    text-transform: uppercase;
+    color: $white;
+  }
+  
+  .empty-message-text,
+  .no-bets-text {
+    text-align: center;
+    color: $white;
+    font-weight: 500;
+    margin-bottom: 0;
+  }
+  
+  .select-odds-text,
+  .select-bets-text {
+    text-align: center;
+    color: rgba($white, 0.7);
+    font-size: 14px;
+  }
+  
+  .total-odds-label,
+  .total-coefficient-label {
+    color: rgba($white, 0.85);
+  }
+  
+  .total-odds-value,
+  .total-coefficient-value {
+    color: $white;
+    font-weight: 500;
+  }
+  
+  .stake-amount-label,
+  .bet-amount-label {
+    display: block;
+    margin-bottom: 5px;
+    color: rgba($white, 0.85);
+    font-size: 15px;
+    font-weight: 500;
+  }
+  
+  .possible-win-label,
+  .potential-win-label {
+    color: $accent-color;
+  }
+  
+  .possible-win-value,
+  .potential-win-value {
+    color: $accent-color;
+    font-weight: 500;
+  }
+  
+  .place-bet-text {
+    font-weight: 500;
+  }
+}
+
+// Футер
+.footer {
+  background-color: $bg-darker;
+  padding: $spacing-xl 0;
+  border-top: 1px solid rgba($white, 0.1);
+  margin-top: auto;
+}
+
+.footer__wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer__logo {
+  margin-bottom: 20px;
+}
+
+.footer__content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  
+  @include mobile {
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
+.footer__column {
+  flex: 1;
+  min-width: 200px;
+  padding-right: 20px;
+  
+  @include mobile {
+    padding-right: 0;
+  }
+}
+
+.footer__title {
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $white;
+  margin-bottom: 15px;
+}
+
+.footer__description {
+  color: rgba($white, 0.7);
+  margin-bottom: 15px;
+  line-height: 1.6;
+}
+
+.footer__links {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  
+  li {
+    margin-bottom: 10px;
+  }
+  
+  a {
+    color: rgba($white, 0.7);
+    text-decoration: none;
+    transition: $transition-base;
+    
+    &:hover {
+      color: $primary-color;
+    }
+  }
+}
+
+.app-links {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.app-link {
+  img {
+    height: 40px;
+    max-width: 100%;
+    filter : invert(1);
+  }
+}
+
+.footer__bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 20px;
+  border-top: 1px solid rgba($white, 0.1);
+  
+  @include mobile {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+}
+
+.copyright {
+  color: rgba($white, 0.5);
+  font-size: $font-size-sm;
+}
+
+.age-restriction {
+  font-weight: $font-weight-bold;
+  color: rgba($white, 0.5);
+}
+
+// Мобильная кнопка купона ставок
+.mobile-betslip-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, $primary-color, darken($primary-color, 15%));
+  display: none;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  z-index: 100;
+  transition: $transition-base;
+  
+  @include mobile {
+    display: flex;
+  }
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  }
+  
+  img {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: $accent-color;
+    color: $dark-color;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: $font-weight-bold;
+  }
+}
+
+// Мобильные стили
+@media (max-width: $breakpoint-md) {
+  .betslip-sidebar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+    
+    &.active {
+      transform: translateY(0);
+    }
+    
+    .betslip {
+      border-radius: $border-radius-lg $border-radius-lg 0 0;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+  }
+}
+
+// Утилиты
+.d-flex { display: flex; }
+.flex-center { @include flex-center; }
+.flex-between { @include flex-between; }
+.flex-column { @include flex-column; }
+
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-left { text-align: left; }
+
+.mb-sm { margin-bottom: $spacing-sm; }
+.mb-md { margin-bottom: $spacing-md; }
+.mb-lg { margin-bottom: $spacing-lg; }
+.mb-xl { margin-bottom: $spacing-xl; }
+
+.mt-sm { margin-top: $spacing-sm; }
+.mt-md { margin-top: $spacing-md; }
+.mt-lg { margin-top: $spacing-lg; }
+.mt-xl { margin-top: $spacing-xl; }
+
+.btn-primary, button[type="submit"] {
+  display: inline-block;
+  padding: $spacing-sm $spacing-lg;
+  font-size: $font-size-base;
+  font-weight: 600;
+  text-align: center;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  background: linear-gradient(135deg, $accent-color, darken($accent-color, 10%));
+  color: $dark-color;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 15px rgba($accent-color, 0.3);
+  
+  &:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 20px rgba($accent-color, 0.4);
+  }
+  
+  &:active:not(:disabled) {
+    transform: translateY(-1px);
+  }
+  
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.place-bet-btn {
+  display: inline-block;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, $accent-color, lighten($accent-color, 10%));
+  color: $white;
+  border-radius: 30px;
+  font-weight: $font-weight-semibold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  box-shadow: 0 5px 15px rgba($accent-color, 0.2);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba($white, 0.2), transparent);
+    transition: left 0.7s ease;
+  }
+  
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba($accent-color, 0.3);
+    background: linear-gradient(135deg, lighten($accent-color, 5%), lighten($accent-color, 15%));
+    
+    &::before {
+      left: 100%;
+    }
+  }
+  
+  &:active {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba($accent-color, 0.2);
+  }
+  
+  &:disabled {
+    background: linear-gradient(135deg, rgba($gray-600, 0.8), rgba($gray-500, 0.8));
+    color: rgba($white, 0.6);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+    
+    &::before {
+      display: none;
+    }
+  }
+}
+
+// Улучшение навигаци
+.navbar {
+  padding: 15px 0;
+  background-color: rgba($dark-color, 0.6);
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .navbar-brand {
+    display: flex;
+    align-items: center;
+    
+    img {
+      height: 40px;
+      margin-right: 10px;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+      transition: transform 0.3s ease;
+    }
+    
+    span {
+      font-size: $font-size-lg;
+      font-weight: $font-weight-bold;
+      color: $white;
+      letter-spacing: 1px;
+      background: linear-gradient(135deg, $primary-color, $accent-color);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      
+      strong {
+        color: $primary-color;
+      }
+    }
+    
+    &:hover {
+      img {
+        transform: scale(1.05);
+      }
+    }
+  }
+  
+  .navbar-nav {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    
+    .nav-item {
+      position: relative;
+      
+      .nav-link {
+        color: rgba($light-color, 0.8);
+        padding: 10px 15px;
+        font-size: $font-size-base;
+        font-weight: $font-weight-medium;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        
+        &:hover, &.active {
+          color: $white;
+          background: rgba($light-color, 0.08);
+        }
+        
+        &.active {
+          color: $primary-color;
+          
+          &::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 3px;
+            background: $primary-color;
+            border-radius: 3px;
+          }
+        }
+        
+        i {
+          margin-right: 5px;
+        }
+      }
+    }
+    
+    .user-dropdown {
+      margin-left: 10px;
+      
+      .dropdown-toggle {
+        display: flex;
+        align-items: center;
+        background: rgba($light-color, 0.08);
+        border-radius: 8px;
+        padding: 8px 12px;
+        border: none;
+        color: $white;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        
+        img {
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          margin-right: 10px;
+          border: 2px solid rgba($primary-color, 0.3);
+        }
+        
+        span {
+          margin-right: 10px;
+          font-weight: $font-weight-medium;
+        }
+        
+        i {
+          color: rgba($light-color, 0.7);
+          transition: transform 0.3s ease;
+        }
+        
+        &:hover {
+          background: rgba($light-color, 0.12);
+          
+          i {
+            transform: rotate(-90deg);
+            color: $primary-color;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Улучшение основного контента
+.main-content {
+  display: flex;
+  padding: 30px 0;
+  gap: 30px;
+  
+  .sidebar {
+    width: 300px;
+    flex-shrink: 0;
+    
+    @media (max-width: $breakpoint-lg) {
+      width: 250px;
+    }
+    
+    @media (max-width: $breakpoint-md) {
+      display: none;
+    }
+  }
+  
+  .content {
+    flex: 1;
+    
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      
+      h2 {
+        font-size: $font-size-xl;
+        font-weight: $font-weight-bold;
+        color: $white;
+        margin: 0;
+        position: relative;
+        
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: -8px;
+          left: 0;
+          width: 40px;
+          height: 3px;
+          background: $primary-color;
+          border-radius: 3px;
+        }
+      }
+      
+      .filters {
+        display: flex;
+        gap: 10px;
+        
+        .filter-btn {
+          background: rgba($light-color, 0.08);
+          border: none;
+          color: $light-color;
+          padding: 8px 15px;
+          border-radius: 6px;
+          font-size: $font-size-sm;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          
+          &:hover, &.active {
+            background: rgba($primary-color, 0.1);
+            color: $primary-color;
+          }
+          
+          &.active {
+            border: 1px solid rgba($primary-color, 0.3);
+          }
+          
+          i {
+            margin-right: 5px;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Анимации
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.event-card {
+  animation: fadeIn 0.5s ease forwards;
+  opacity: 0;
+  animation-fill-mode: both;
+  
+  @for $i from 1 through 10 {
+    &:nth-child(#{$i}) {
+      animation-delay: #{$i * 0.1}s;
+    }
+  }
+}
+
+/* Betslip Styles */
+.betslip {
+  &__bet-item {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 10px;
+    position: relative;
+    
+    &-teams {
+      font-weight: 600;
+      margin-bottom: 4px;
+      padding-right: 20px;
+    }
+    
+    &-market {
+      font-size: 0.9em;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 8px;
+    }
+    
+    &-details {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9em;
+    }
+    
+    &-odds {
+      font-weight: 600;
+      color: var(--primary-color);
+    }
+    
+    &-delete {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.1);
+      border: none;
+      color: white;
+      font-size: 16px;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+      
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+    }
+  }
+  
+  &__success {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    background-color: rgba(76, 175, 80, 0.1);
+    border-radius: 8px;
+    color: white;
+    font-weight: 500;
+  }
+}
+
+/* Bet Popup Styles */
+.bet-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(13, 13, 20, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+  animation: fadeIn 0.3s ease-out;
+}
+
+.bet-popup {
+  width: 100%;
+  max-width: 450px;
+  background: linear-gradient(135deg, rgba(30, 30, 46, 0.95), rgba(20, 20, 33, 0.98));
+  border-radius: $border-radius-lg;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 
+              0 1px 1px rgba(255, 255, 255, 0.1) inset, 
+              0 -1px 1px rgba(0, 0, 0, 0.2) inset;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  animation: slideUp 0.3s ease-out;
+}
+
+.bet-popup-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 20px;
+  background: linear-gradient(to right, rgba($primary-color, 0.2), rgba($accent-color, 0.2));
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.bet-popup-title {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: $text-color-light;
+  
+  svg {
+    margin-right: 10px;
+  }
+}
+
+.bet-popup-close {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 26px;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: $border-radius-sm;
+  transition: all 0.2s;
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    transform: rotate(90deg);
+  }
+}
+
+.bet-popup-content {
+  padding: 20px;
+  max-height: 70vh;
+  overflow-y: auto;
+  
+  /* Custom scrollbar */
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: rgba($primary-color, 0.5);
+    border-radius: 4px;
+    
+    &:hover {
+      background: rgba($primary-color, 0.7);
+    }
+  }
+}
+
+.bet-popup-bets {
+  margin-bottom: 20px;
+}
+
+.bet-popup-bet {
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: $border-radius-md;
+    background: radial-gradient(circle at top right, 
+                rgba($primary-color, 0.15), 
+                transparent 70%);
+    pointer-events: none;
+    z-index: -1;
+  }
+}
+
+

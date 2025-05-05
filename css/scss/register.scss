@@ -1,0 +1,190 @@
+/* Styles for register page */
+/* Временные стили до компиляции SCSS */
+body.register-page {
+    background: linear-gradient(135deg, #1e103d, #0f0a1e);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    
+    &::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(circle at 10% 10%, rgba(165, 55, 253, 0.1), transparent 35%),
+                    radial-gradient(circle at 90% 90%, rgba(0, 230, 118, 0.05), transparent 25%);
+        z-index: -1;
+    }
+}
+
+.app-link img {
+    max-width: 100%;
+    height: 40px;
+}
+
+/* Декоративные элементы */
+.decoration-circle {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.3;
+    z-index: -1;
+}
+
+.decoration-circle-1 {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(165, 55, 253, 0.4) 0%, rgba(165, 55, 253, 0) 70%);
+    top: -200px;
+    left: -200px;
+    animation: float 20s ease-in-out infinite;
+}
+
+.decoration-circle-2 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(0, 230, 118, 0.4) 0%, rgba(0, 230, 118, 0) 70%);
+    bottom: -150px;
+    right: -150px;
+    animation: float 15s ease-in-out infinite reverse;
+}
+
+.decoration-circle-3 {
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(83, 143, 255, 0.4) 0%, rgba(83, 143, 255, 0) 70%);
+    top: 40%;
+    left: 20%;
+    animation: float 18s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% { transform: translate(0, 0); }
+    50% { transform: translate(20px, -20px); }
+    100% { transform: translate(0, 0); }
+}
+
+/* Обновленные стили для формы */
+.auth-container {
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.auth-header {
+    background: linear-gradient(135deg, #a537fd, #8002e5);
+}
+
+.auth-body {
+    background-color: rgba(30, 16, 61, 0.7);
+}
+
+.form-input {
+    transition: all 0.3s ease;
+}
+
+.form-input:focus {
+    transform: translateY(-2px);
+}
+
+.auth-btn {
+    background: linear-gradient(135deg, #a537fd, #8002e5);
+    transition: all 0.3s ease;
+}
+
+.auth-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(165, 55, 253, 0.4);
+}
+
+/* Стили для формы регистрации */
+.form-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.form-row .form-group {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+.terms-checkbox {
+    margin: 20px 0;
+}
+
+/* Обновленные стили для промо-блока */
+.login-promo {
+    background: linear-gradient(135deg, #a537fd, #7202cc);
+    position: relative;
+    overflow: hidden;
+}
+
+.login-promo::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMjUsMzAgTDc1LDMwIE03NSw3MCBMMjUsNzAiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjEpIiBzdHJva2Utd2lkdGg9IjIiIGZpbGw9Im5vbmUiLz48L3N2Zz4=');
+    background-size: 50px;
+    opacity: 0.1;
+}
+
+.login-promo-btn {
+    background-color: #00e676;
+    transition: all 0.3s ease;
+}
+
+.login-promo-btn:hover {
+    background-color: #00c853;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 230, 118, 0.4);
+}
+
+.checkbox-text {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    a {
+        margin: 0 5px 0 5px;
+    }
+}
+
+.form-checkbox {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    justify-content: center;
+}
+
+/* Стили для списка преимуществ в промо-блоке */
+.login-promo ul {
+    color: white;
+    margin-bottom: 30px;
+    padding-left: 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.login-promo ul li {
+    margin-bottom: 10px;
+}
+
+.login-promo ul li:last-child {
+    margin-bottom: 0;
+}
+
+/* Адаптивные стили */
+@media (max-width: 576px) {
+    .form-row {
+        flex-direction: column;
+        gap: 20px;
+    }
+} 

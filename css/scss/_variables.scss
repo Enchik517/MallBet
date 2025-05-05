@@ -1,0 +1,198 @@
+// Основные цвета
+$primary-color: #a537fd; // Фиолетовый (основной цвет бренда MalBet)
+$secondary-color: #2196f3; // Темно-фиолетовый
+$accent-color: #00e676; // Ярко-зеленый
+$success-color: #4caf50; // Яркий зеленый для успешных статусов
+$danger-color: #f44336;
+$warning-color: #ff9800;
+$info-color: #2196f3;
+$error-color: #ff4d4f;
+
+// Оттенки серого
+$white: #fff;
+$gray-100: #f8f9fa;
+$gray-200: #e9ecef;
+$gray-300: #dee2e6;
+$gray-400: #ced4da;
+$gray-500: #adb5bd;
+$gray-600: #6c757d;
+$gray-700: #495057;
+$gray-800: #343a40;
+$gray-900: #212529;
+$black: #000;
+$gray-color: #f5f5f5;
+$gray-dark-color: #e0e0e0;
+
+// Цвета фона
+$bg-color: #14092e; // Темно-фиолетовый фон (как на скриншоте)
+$bg-light: #2d1a4a; // Светлее темно-фиолетового фона
+$dark-color: #1e103d; // Очень темный фиолетовый для фона хедера
+$bg-dark: #0a0418;
+$bg-darker: #0f0621; // Еще темнее
+$background-color: $bg-color;
+$input-bg: #2a1945; // Фон для инпутов
+$light-color: #f5f5f5;
+$header-bg: $dark-color; // Цвет фона шапки
+$card-bg: #231248; // Цвет фона карточек
+$hover-color: rgba(255, 255, 255, 0.05); // Цвет при наведении
+
+// Цвета текста
+$text-color: #e0e0ff; // Основной цвет текста - белый
+$text-color-light: #ffffff; // Светлый текст
+$text-color-muted: #a9a9b8; // Приглушенный текст - фиолетовый
+$text-color-inverse: $white;
+$text-primary: rgba(255, 255, 255, 0.87);
+$text-secondary: #b9a5d8; // Светло-фиолетовый для вторичного текста
+$text-muted: #a9a9b8;
+
+// Цвета для коэффициентов
+$odd-up-color: #2ceead; // Зеленый
+$odd-down-color: #f44336;
+$odd-normal-color: $white;
+$odd-active-color: $primary-color;
+
+// Цвета границ
+$border-color: #3a3a3a;
+$border-color-dark: $gray-600;
+
+// Типографика
+// Семейство шрифтов
+$font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$font-family-heading: $font-family-base;
+$font-family-headings: $font-family-base;
+$font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+// Размеры шрифтов
+$font-size-xxs: 0.75rem;   // 12px
+$font-size-xs: 0.8125rem;  // 13px
+$font-size-sm: 0.875rem;   // 14px
+$font-size-base: 1rem;     // 16px
+$font-size-md: 1.125rem;   // 18px
+$font-size-lg: 1.25rem;    // 20px
+$font-size-xl: 1.5rem;     // 24px
+$font-size-xxl: 2rem;      // 32px
+$font-size-xxxl: 2.5rem;   // 40px
+
+// Высота линий
+$line-height-tight: 1.2;
+$line-height-base: 1.6;
+$line-height-loose: 2;
+
+// Толщина шрифта
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+// Отступы
+$spacing-xxs: 0.25rem;  // 4px
+$spacing-xs: 0.5rem;    // 8px
+$spacing-sm: 0.75rem;   // 12px
+$spacing-md: 1rem;      // 16px
+$spacing-lg: 1.5rem;    // 24px
+$spacing-xl: 2rem;      // 32px
+$spacing-xxl: 3rem;     // 48px
+$container-padding: 15px;
+
+// Размеры компонентов
+$header-height: 70px;
+$footer-height: 60px;
+$navbar-height: 80px;
+$sidebar-width: 280px;
+$container-max-width: 1200px;
+$card-padding: $spacing-md;
+$input-height: 40px;
+
+// Скругления
+$border-radius-sm: 3px;
+$border-radius-md: 4px;
+$border-radius-base: 6px;
+$border-radius-lg: 12px;
+$border-radius-xl: 18px;
+$border-radius-large: 8px;
+$border-radius-circle: 50%;
+$border-radius: $border-radius-base; // Для обратной совместимости
+
+// Тени
+$shadow-sm: 0 1px 2px rgba($black, 0.1);
+$shadow-md: 0 4px 8px rgba($black, 0.2);
+$shadow-lg: 0 10px 20px rgba($black, 0.25);
+$shadow-xl: 0 15px 30px rgba($black, 0.3);
+$box-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+$box-shadow-base: 0 4px 12px rgba(0, 0, 0, 0.15);
+$box-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.2);
+$box-shadow-xl: 0 10px 25px rgba(0, 0, 0, 0.1);
+$box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+// Переходы и анимации
+$transition-duration-fast: 0.15s;
+$transition-duration-base: 0.3s;
+$transition-duration-slow: 0.5s;
+$transition-timing-function: ease;
+$transition-base: all 0.3s ease;
+$animation-duration-fast: 0.15s;
+$animation-duration-base: 0.3s;
+$animation-duration-slow: 0.5s;
+$animation-timing-function: ease;
+
+// Z-индексы
+$z-header: 1000;
+$z-fixed: 1030;
+$z-modal: 1050;
+$z-index-dropdown: 1000;
+$z-index-sticky: 1020;
+$z-index-fixed: 1030;
+$z-index-modal-backdrop: 1040;
+$z-index-modal: 1050;
+$z-index-tooltip: 1070;
+$z-index-popover: 1060;
+$z-index-header: 1000;
+
+// Брейкпоинты
+$breakpoint-xs: 0;
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+$breakpoint-mobile: 480px;
+$breakpoint-tablet: 768px;
+$breakpoint-desktop: 1024px;
+
+// Компоненты сайта
+// Кнопки
+$button-padding-vertical: 12px;
+$button-padding-horizontal: 24px;
+$button-padding-vertical-sm: 8px;
+$button-padding-horizontal-sm: 16px;
+$button-padding-vertical-lg: 16px;
+$button-padding-horizontal-lg: 32px;
+
+// Карточки
+$card-padding: $spacing-md;
+$card-border-radius: $border-radius-base;
+$card-background: $light-color;
+$card-margin-bottom: $spacing-md;
+
+// Формы
+$input-height: 48px;
+$input-height-sm: 36px;
+$input-height-lg: 54px;
+$input-padding-horizontal: $spacing-md;
+$input-border-color: $gray-dark-color;
+$input-border-color-focus: $primary-color;
+$input-border-radius: $border-radius-base;
+$input-box-shadow-focus: 0 0 0 2px rgba($primary-color, 0.25);
+
+// Сетка
+$grid-columns: 12;
+$grid-gutter-width: 30px;
+
+// Добавим или обновим переменные для мобильных устройств
+$mobile-width: 480px;
+$tablet-width: 1024px;
+$primary-color: #a537fd;
+$accent-color: #00e676;
+$text-color: #ffffff;
+
+// Остальное содержимое файла сохраняем 
